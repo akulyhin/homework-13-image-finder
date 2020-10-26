@@ -31,11 +31,17 @@ refs.loadMoreBtn.addEventListener('click', () => {
     apiService.setPage();
 
     refs.loadMoreBtn.disabled = true;
+    refs.spinner.classList.remove('is-hidden');
+    refs.spinnerBtn.classList.remove('is-hidden');
+    refs.btnText.textContent = 'Загрузка...';
 
     apiService.toGetFetch().then(data => 
-        refs.gallery.insertAdjacentHTML('beforeend', templateGallery(data)));
-
-        refs.loadMoreBtn.disabled = false;
+        {refs.gallery.insertAdjacentHTML('beforeend', templateGallery(data)),
+        refs.spinner.classList.add('is-hidden'),
+        refs.spinnerBtn.classList.add('is-hidden'),
+        refs.btnText.textContent = 'Показать еще',
+        refs.loadMoreBtn.disabled = false})
+        
 });
 
 refs.gallery.addEventListener('click', (e) => {

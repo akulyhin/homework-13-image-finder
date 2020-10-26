@@ -28,19 +28,22 @@
         autocomplete="off"
         placeholder="Search images..."
       />
+
+
     </form>
-
-    <div class="spinner spinner-grow text-primary is-hidden" role="status">
-    </div>
-
-  </div>
+ 
 
     <ul class="gallery">
       <!-- Список <li> с карточками изображений -->
     </ul>
+    <div class="spinner spinner-grow text-primary is-hidden" role="status">
+    </div>
+    <button class="btn btn-primary load-more is-hidden">
+      <span class="spinnerBtn spinner-border spinner-border-sm is-hidden" role="status" aria-hidden="true"></span>
+      <span class="btn-text">Показать еще</span>
+    </button>
 
-    <button class="btn btn-primary load-more is-hidden">Показать еще</button>
-
+  </div>
 
     <div class="lightbox js-lightbox">
       <div class="lightbox__overlay"></div>

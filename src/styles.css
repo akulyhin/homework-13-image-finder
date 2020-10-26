@@ -32,6 +32,12 @@ body {
   flex-direction: column;
 }
 
+.search-form {
+  padding: 50px;
+}
+
+
+
 .gallery {
   display: flex;
   justify-content: space-between;
