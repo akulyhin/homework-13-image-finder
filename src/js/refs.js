@@ -7,5 +7,7 @@ export default {
     btnText: document.querySelector('.btn-text'),
     jsLightbox: document.querySelector('.js-lightbox'),
     lightboxImage: document.querySelector('.lightbox__image'),
-    closeLightBox: document.querySelector('[data-action="close-lightbox"]')
+    closeLightBox: document.querySelector('[data-action="close-lightbox"]'),
+    backToTop: document.querySelector('.back-2-top'),
+    goToBottom: document.querySelector('.go-2-bottom')
 }

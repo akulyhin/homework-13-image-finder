@@ -5,8 +5,6 @@ import debounce from 'lodash.debounce';
 import templateGallery from './templates/templateGallery.hbs';
 
 
-
-
 refs.search.addEventListener('input', debounce((e) => {
     
     if (e.target.value === '') {
@@ -75,4 +73,19 @@ refs.closeLightBox.addEventListener('click', () => {
 });
 
 
+// Arrow Back to top
+refs.backToTop.addEventListener('click', () => {
+    console.dir(document.body)
+    scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+});
 
+// Arrow Go to bottom
+refs.goToBottom.addEventListener('click', () => {
+    scrollTo({
+        top: document.body.clientHeight,
+        behavior: 'smooth'
+    })
+})
