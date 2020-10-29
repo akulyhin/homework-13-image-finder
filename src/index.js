@@ -3,13 +3,14 @@ import apiService from './js/apiService';
 import refs from './js/refs';
 import debounce from 'lodash.debounce';
 import templateGallery from './templates/templateGallery.hbs';
+import showHide from './js/showHide';
 
 
 refs.search.addEventListener('input', debounce((e) => {
     
     if (e.target.value === '') {
         refs.gallery.innerHTML = '';
-        refs.loadMoreBtn.classList.add('is-hidden');
+        showHide.hideElement(refs.loadMoreBtn);
         return;
     }
 
@@ -18,14 +19,15 @@ refs.search.addEventListener('input', debounce((e) => {
         refs.btnText.textContent = 'Показать еще';
 
     }
-
-    refs.spinner.classList.remove('is-hidden');
-    refs.loadMoreBtn.classList.remove('is-hidden');
+    showHide.showElement(refs.spinner);
+    showHide.showElement(refs.loadMoreBtn);
     apiService.query = e.target.value;
 
+    apiService.resetPage();
     apiService.toGetFetch().then(data => 
         {refs.gallery.innerHTML = templateGallery(data),
-            refs.spinner.classList.add('is-hidden');
+            showHide.hideElement(refs.spinner),
+            emptyResponse(data)
         });
         
 
@@ -36,15 +38,16 @@ refs.loadMoreBtn.addEventListener('click', () => {
     apiService.setPage();
 
     refs.loadMoreBtn.disabled = true;
-    refs.spinner.classList.remove('is-hidden');
-    refs.spinnerBtn.classList.remove('is-hidden');
+    showHide.showElement(refs.spinner);
+    showHide.showElement(refs.spinnerBtn);
     refs.btnText.textContent = 'Загрузка...';
-
+    
     apiService.toGetFetch().then(data => 
         {
-        refs.gallery.insertAdjacentHTML('beforeend', templateGallery(data)),
-        refs.spinner.classList.add('is-hidden'),
-        refs.spinnerBtn.classList.add('is-hidden'),
+            refs.gallery.insertAdjacentHTML('beforeend', templateGallery(data)),
+            
+        showHide.hideElement(refs.spinner),
+        showHide.hideElement(refs.spinnerBtn),
         refs.btnText.textContent = 'Показать еще',
         refs.loadMoreBtn.disabled = false,
         emptyArray(data)})
@@ -56,6 +59,16 @@ function emptyArray (data) {
         refs.btnText.textContent = 'Больше нет'
         refs.loadMoreBtn.disabled = true
         return
+    }
+}
+
+function emptyResponse (data) {
+    if (data.length === 0) {
+        showHide.hideElement(refs.loadMoreBtn);
+        showHide.showElement(refs.alert);
+    }
+    else if (data.length > 0) {
+        showHide.hideElement(refs.alert);
     }
 }
 

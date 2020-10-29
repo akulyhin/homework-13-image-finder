@@ -9,5 +9,7 @@ export default {
     lightboxImage: document.querySelector('.lightbox__image'),
     closeLightBox: document.querySelector('[data-action="close-lightbox"]'),
     backToTop: document.querySelector('.back-2-top'),
-    goToBottom: document.querySelector('.go-2-bottom')
+    goToBottom: document.querySelector('.go-2-bottom'),
+    body: document.querySelector('body'), 
+    alert: document.querySelector('.alert')
 }
