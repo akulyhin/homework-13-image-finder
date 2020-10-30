@@ -50,7 +50,8 @@ refs.loadMoreBtn.addEventListener('click', () => {
         showHide.hideElement(refs.spinnerBtn),
         refs.btnText.textContent = 'Показать еще',
         refs.loadMoreBtn.disabled = false,
-        emptyArray(data)})
+        emptyArray(data)
+    })
         
 });
 
@@ -67,10 +68,19 @@ function emptyResponse (data) {
         showHide.hideElement(refs.loadMoreBtn);
         showHide.showElement(refs.alert);
     }
-    else if (data.length > 0) {
+
+    else if (data.length < 12) {
+        showHide.hideElement(refs.loadMoreBtn);
+        console.log(data.length);
+    }
+
+    else {
         showHide.hideElement(refs.alert);
+        console.dir(data)
+        // showHide.showElement(refs.loadMoreBtn);
     }
 }
+
 
 refs.gallery.addEventListener('click', (e) => {
 
